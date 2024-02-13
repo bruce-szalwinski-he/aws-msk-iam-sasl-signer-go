@@ -185,16 +185,16 @@ func constructAuthToken(ctx context.Context, region string, credentials *aws.Cre
 		return "", 0, fmt.Errorf("failed to extract expiration from signed url: %w", err)
 	}
 
-	//signedURLWithUserAgent, err := addUserAgent(signedURL)
-	//if err != nil {
-	//	return "", 0, fmt.Errorf("failed to add user agent to the signed url: %w", err)
-	//}
-
-	if AwsDebugCreds {
-		log.Printf("Signed Url: %s\n", signedURL)
+	signedURLWithUserAgent, err := addUserAgent(signedURL)
+	if err != nil {
+		return "", 0, fmt.Errorf("failed to add user agent to the signed url: %w", err)
 	}
 
-	return base64Encode(signedURL), expirationTimeMs, nil
+	if AwsDebugCreds {
+		log.Printf("Signed Url: %s\n", signedURLWithUserAgent)
+	}
+
+	return base64Encode(signedURLWithUserAgent), expirationTimeMs, nil
 }
 
 // Build https request with query parameters in order to sign.
