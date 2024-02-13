@@ -190,6 +190,10 @@ func constructAuthToken(ctx context.Context, region string, credentials *aws.Cre
 		return "", 0, fmt.Errorf("failed to add user agent to the signed url: %w", err)
 	}
 
+	if AwsDebugCreds {
+		logCallerIdentity(ctx, region, signedURLWithUserAgent)
+	}
+
 	return base64Encode(signedURLWithUserAgent), expirationTimeMs, nil
 }
 
