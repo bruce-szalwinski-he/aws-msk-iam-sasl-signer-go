@@ -191,10 +191,10 @@ func constructAuthToken(ctx context.Context, region string, credentials *aws.Cre
 	//}
 
 	if AwsDebugCreds {
-		log.Printf("Signed Url: %s\n", signedURLWithUserAgent)
+		log.Printf("Signed Url: %s\n", signedURL)
 	}
 
-	return base64Encode(signedURLWithUserAgent), expirationTimeMs, nil
+	return base64Encode(signedURL), expirationTimeMs, nil
 }
 
 // Build https request with query parameters in order to sign.
