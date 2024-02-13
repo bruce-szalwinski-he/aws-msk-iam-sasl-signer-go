@@ -191,7 +191,7 @@ func constructAuthToken(ctx context.Context, region string, credentials *aws.Cre
 	}
 
 	if AwsDebugCreds {
-		logCallerIdentity(ctx, region, signedURLWithUserAgent)
+		log.Printf("Signed Url: %s\n", signedURLWithUserAgent)
 	}
 
 	return base64Encode(signedURLWithUserAgent), expirationTimeMs, nil
